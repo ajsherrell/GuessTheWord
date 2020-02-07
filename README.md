@@ -1,7 +1,8 @@
 # Guess The Word
 - A game of charades.
 - Made with Google Code Labs
-- Uses MVVM
+- MVVM
+- LiveData
 
 ## This app uses Android Architecture Components
  - UI Controller: 
@@ -10,9 +11,11 @@
  - ViewModel:
  A ViewModel holds data to be displayed in a fragment or activity associated with the ViewModel. A ViewModel can do simple calculations and transformations on data to prepare the data to be displayed by the UI controller. In this architecture, the ViewModel performs the decision-making.
 
- - ViewModel Factory
+ - ViewModel Factory:
  A viewModel Factory instantiates ViewModel objects, with or without constructor parameters. A factory method is a method that returns an instance of the same class.
 
+ - LiveData:
+ LiveData lets you build data objects that notify views when the underlying database changes. To use the LiveData class, you set up "observers" (for example, activities or fragments) that observe changes in the app's data. LiveData is lifecycle-aware, so it only updates app-component observers that are in an active lifecycle state. LiveData is observable, which means that an observer is notified when the data held by the LiveData object changes. LiveData holds data; LiveData is a wrapper that can be used with any data. LiveData is lifecycle-aware. When you attach an observer to the LiveData, the observer is associated with a LifecycleOwner (usually an Activity or Fragment).
 
 ### UI controller
 - An example of a UI controller is the ScoreFragment that you created in this codelab.
