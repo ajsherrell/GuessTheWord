@@ -15,7 +15,24 @@
  A viewModel Factory instantiates ViewModel objects, with or without constructor parameters. A factory method is a method that returns an instance of the same class.
 
  - LiveData:
- LiveData lets you build data objects that notify views when the underlying database changes. To use the LiveData class, you set up "observers" (for example, activities or fragments) that observe changes in the app's data. LiveData is lifecycle-aware, so it only updates app-component observers that are in an active lifecycle state. LiveData is observable, which means that an observer is notified when the data held by the LiveData object changes. LiveData holds data; LiveData is a wrapper that can be used with any data. LiveData is lifecycle-aware. When you attach an observer to the LiveData, the observer is associated with a LifecycleOwner (usually an Activity or Fragment).
+ LiveData lets you build data objects that notify views when the underlying database changes. To use the LiveData class, you set up "observers" (for example, activities or fragments) that observe changes in the app's data. LiveData is lifecycle-aware, so it only updates app-component observers that are in an active lifecycle state. LiveData is observable, which means that an observer is notified when the data held by the LiveData object changes. LiveData holds data; LiveData is a wrapper that can be used with any data. LiveData is lifecycle-aware. When you attach an observer to the LiveData, the observer is associated with a LifecycleOwner (usually an Activity or Fragment). Usually, LiveData delivers updates to the observers only when data changes. An exception to this behavior is that observers also receive updates when the observer changes from an inactive to an active state.
+
+ #### Why use viewLifecycleOwner?
+Fragment views get destroyed when a user navigates away from a fragment, even though the fragment itself is not destroyed. This essentially creates two lifecycles, the lifecycle of the fragment, and the lifecycle of the fragment's view. Referring to the fragment's lifecycle instead of the fragment view's lifecycle can cause subtle bugs when updating the fragment's view. Therefore, when setting up observers that affect the fragment's view you should:
+
+1. Set up the observers in onCreateView()
+
+2. Pass in viewLifecycleOwner to observers
+
+#### Encapsulation
+Encapsulation is a way to restrict direct access to some of an object's fields. When you encapsulate an object, you expose a set of public methods that modify the private internal fields. Using encapsulation, you control how other classes manipulate these internal fields. Only the ViewModel should edit the data in your app. But UI controllers need to read the data, so the data fields can't be completely private. To encapsulate your app's data, you use both MutableLiveData and LiveData objects.
+
+- MutableLiveData vs. LiveData:
+Data in a MutableLiveData object can be changed, as the name implies. Inside the ViewModel, the data should be editable, so it uses MutableLiveData.
+Data in a LiveData object can be read, but not changed. From outside the ViewModel, data should be readable, but not editable, so the data should be exposed as LiveData. To carry out this strategy, you use a Kotlin backing property. A backing property allows you to return something from a getter other than the exact object.
+
+#### The observer pattern
+The observer pattern is a software design pattern. It specifies communication between objects: an observable (the "subject" of observation) and observers. An observable is an object that notifies observers about the changes in its state. In the case of LiveData in this app, the observable (subject) is the LiveData object, and the observers are the methods in the UI controllers, such as fragments. A state change happens whenever the data wrapped inside LiveData changes. The LiveData classes are crucial in communicating from the ViewModel to the fragment.
 
 ### UI controller
 - An example of a UI controller is the ScoreFragment that you created in this codelab.
