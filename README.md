@@ -3,6 +3,8 @@
 - Made with Google Code Labs
 - MVVM
 - LiveData
+- Databinding
+- String Formatting
 
 ## This app uses Android Architecture Components
  - UI Controller: 
