@@ -20,10 +20,10 @@
  LiveData lets you build data objects that notify views when the underlying database changes. To use the LiveData class, you set up "observers" (for example, activities or fragments) that observe changes in the app's data. LiveData is lifecycle-aware, so it only updates app-component observers that are in an active lifecycle state. LiveData is observable, which means that an observer is notified when the data held by the LiveData object changes. LiveData holds data; LiveData is a wrapper that can be used with any data. LiveData is lifecycle-aware. When you attach an observer to the LiveData, the observer is associated with a LifecycleOwner (usually an Activity or Fragment). Usually, LiveData delivers updates to the observers only when data changes. An exception to this behavior is that observers also receive updates when the 
  observer changes from an inactive to an active state.
 
- - Transformations.map()
+ - Transformations.map():
  The Transformations.map() method provides a way to perform data manipulations on the source LiveData and return a result LiveData object. These transformations aren't calculated unless an observer is observing the returned LiveData object. This method takes the source LiveData and a function as parameters. The function manipulates the source LiveData. The lambda function passed to Transformation.map() is executed on the main thread, so do not include long-running tasks.
 
- - Formatting Dates
+ - Formatting Dates:
  The DateUtils.formatElapsedTime() utility method takes a long number of milliseconds and formats the number to use a MM:SS string format.
 
 
